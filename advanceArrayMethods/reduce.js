@@ -37,8 +37,12 @@ Examples:
 */
 
 function extractValue(arr, key) {
-
+    return arr.map(element => {
+        return element[key];
+    });
 }
+var arr = [{ name: 'Elie' }, { name: 'Tim' }, { name: 'Matt' }, { name: 'Colt' }]
+console.log(extractValue(arr, 'name')); // ['Elie', 'Tim', 'Matt', 'Colt']
 
 
 /*
