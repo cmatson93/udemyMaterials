@@ -62,3 +62,10 @@ function classroom() {
 }
 
 var first = classRoom();
+
+/* 
+4. The 'new' keyword
+    - We can set the context of the keyword 'this' using the 
+    'new' keyword.
+    - This referes to the 'new' object created.
+*/

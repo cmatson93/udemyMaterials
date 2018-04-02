@@ -9,7 +9,12 @@ Examples:
 */
 
 function specialMultiply(a, b) {
-
+    if (arguments.length === 1) {
+        return function(b) {
+            return a * b;
+        }
+    }
+    return a * b;
 }
 /* 
 Write a function called guessingGame which takes in one parameter amount. The function should return another function that takes in a parameter called guess. In the outer function, you should create a variable called answer which is the result of a random number between 0 and 10 as well as a variable called guesses which should be set to 0.
@@ -35,5 +40,24 @@ Examples (yours might not be like this, since the answer is random every time):
 */
 
 function guessingGame(amount) {
-
+    var answer = Math.floor(Math.random() * 11);
+    var guesses = 0;
+    var completed = false;
+    return function(guess) {
+        if (!completed) {
+            guesses++
+            if (guess === answer) {
+                completed = true;
+                return "You got it!"
+            } else if (guesses === amount) {
+                completed = true;
+                return "No more guesses the answer was " + answer;
+            } else if (guess > answer) return "Your guess is too high!"
+            else if (guess < answer) return "Your guess is too low!"
+        }
+        return "You are all done playing!"
+    }
 }
+
+var game = guessingGame(5)
+console.log(game(1)); // "You're too low!"
