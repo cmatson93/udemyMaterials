@@ -1,10 +1,10 @@
 // 1 - Create a constructor function for a Person. Each person should have a firstName, lastName, favoriteColor, favoriteNumber)
 function Person(firstName, lastName, favoriteColor, favoriteNumber) {
-    firstName = this.firstName;
-    lastName = this.lastName;
-    favoriteColor = this.favoriteColor;
-    favoriteNumber = this.favoriteNumber;
-    famile = [];
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.favoriteColor = favoriteColor;
+    this.favoriteNumber = favoriteNumber;
+    this.family = [];
 };
 /* 2 - Add a function on the Person.prototype called fullName that returns the firstName and lastName property of an object created by the Person constructor concatenated together.
     
@@ -13,7 +13,7 @@ Examples:
     person.fullName() // "Elie Schoppik"
 
 */
-Person.prototype.fullName() {
+Person.prototype.fullName = function() {
     return this.firstName + " " + this.lastName;
 }
 
@@ -37,13 +37,24 @@ Examples:
     person.family.length // 1
 */
 
-Person.prototype.addToFamily() {
-
-}
+Person.prototype.addToFamily = function(person) {
+    if (this.family.indexOf(person) === -1 && person instanceof Person) {
+        this.family.push(person)
+    }
+    return this.family.length;
+};
 
 // PART II 
 
 // 1 - Implement your own version of Array.prototype.map. The function should accept a callback and return a new array with the result of the callback for each value in the array. 
+
+Array.prototype.map = function(callback) {
+    var newArr = [];
+    for (var i = 0; i < this.length; i++) {
+        newArr.push(callback(this[i], i, this))
+    }
+    return newArr;
+}
 
 /* 2 - Implement a function called reverse that reverses a string and place it on the String.prototype
 
@@ -51,3 +62,11 @@ Examples:
     "test".reverse() // "tset"
     "tacocat".reverse() // "tacocat"
 */
+
+String.prototype.reverse = function() {
+    var newStr = '';
+    for (var i = this.length - 1; i >= 0; i--) {
+        newStr += this[i]
+    }
+    return newStr;
+}
